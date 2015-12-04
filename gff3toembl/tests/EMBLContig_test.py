@@ -372,7 +372,7 @@ class TestEMBLFeature(unittest.TestCase):
     self.assertEqual(feature.translation_table, 11)
 
     expected_attributes = [('some_attribute', 'ABC')]
-    self.assertItemsEqual(feature.attributes, expected_attributes)
+    self.assertEqual(feature.attributes, expected_attributes)
 
   def test_initializer_for_ignored_features(self):
     feature = EMBLFeature(
@@ -446,7 +446,7 @@ FT                   /attributeB="baz"
     self.assertEqual(feature.translation_table, 11)
 
     expected_attributes = [('some_attribute', 'ABC')]
-    self.assertItemsEqual(feature.attributes, expected_attributes)
+    self.assertEqual(feature.attributes, expected_attributes)
 
   def test_create_default_feature_with_locus_tag(self):
     feature = self.create_uninitialized_feature()
@@ -466,8 +466,9 @@ FT                   /attributeB="baz"
     self.assertEqual(feature.locus_tag, 'A_LOCUS_TAG')
     self.assertEqual(feature.translation_table, 11)
 
-    expected_attributes = [('some_attribute', 'ABC'), ('locus_tag', 'A_LOCUS_TAG_123')]
-    self.assertItemsEqual(feature.attributes, expected_attributes)
+    # TODO: Switch to .assertCountEqual under Python 3
+    expected_attributes = [('locus_tag', 'A_LOCUS_TAG_123'), ('some_attribute', 'ABC')]
+    self.assertEqual(sorted(feature.attributes), expected_attributes)
 
   def test_create_CDS_feature(self):
     feature = self.create_uninitialized_feature()
@@ -487,8 +488,9 @@ FT                   /attributeB="baz"
     self.assertEqual(feature.locus_tag, None)
     self.assertEqual(feature.translation_table, 11)
 
+    # TODO: Switch to .assertCountEqual under Python 3
     expected_attributes = [('some_attribute', 'ABC'), ('transl_table', 11)]
-    self.assertItemsEqual(feature.attributes, expected_attributes)
+    self.assertEqual(sorted(feature.attributes), expected_attributes)
 
   def test_create_source_feature(self):
     feature = self.create_uninitialized_feature()
