@@ -38,7 +38,7 @@ Sequence
     header_mock = MagicMock()
     sequence_mock = MagicMock()
     header_mock.format.return_value = "Header"
-    sequence_mock.format.return_value = "Very long line: " + '*'*100
+    sequence_mock.format.return_value = "Very long line: " + '*' * 100
     contig.header = header_mock
     contig.features = {}
     contig.sequence = sequence_mock
