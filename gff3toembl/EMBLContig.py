@@ -33,7 +33,7 @@ class EMBLContig(object):
 
   def add_feature(self, sequence_id, **kwargs):
     feature = EMBLFeature(**kwargs)
-    unique_feature_reference = "{}_{}_{}_{}".format(sequence_id, feature.feature_type, feature.start, feature.end)
+    unique_feature_reference = "{0}_{1}_{2}_{3}".format(sequence_id, feature.feature_type, feature.start, feature.end)
     if unique_feature_reference in self.features:
       # we're already seen a feature in this region so don't add another
       return False
@@ -216,7 +216,7 @@ class EMBLFeature(object):
       return [('locus_tag', attribute_value)]
     else:
       attribute_value_suffix = attribute_value.split('_')[-1]
-      return [('locus_tag', "{}_{}".format(self.locus_tag, attribute_value_suffix))]
+      return [('locus_tag', "{0}_{1}".format(self.locus_tag, attribute_value_suffix))]
 
   def create_EC_number_attributes(self, attribute_key, attribute_value):
     attribute_values = attribute_value.split(',')
@@ -315,7 +315,7 @@ FH
     organism = empty_string_if_none(organism)
     taxon_id = empty_string_if_none(taxon_id)
     sequence_name = empty_string_if_none(sequence_name)
-    return {"organism": organism, "db_xref": "taxon:{}".format(taxon_id), "note": sequence_name}
+    return {"organism": organism, "db_xref": "taxon:{0}".format(taxon_id), "note": sequence_name}
 
 class EMBLSequence(object):
 
