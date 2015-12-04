@@ -1,9 +1,4 @@
 language: python
-addons:
-  apt:
-    packages:
-    - g++
-    - python-dev
 cache:
   directories:
   - "build"
